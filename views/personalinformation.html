@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>D&D Dating</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Adds in the stylesheet forms from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Navbar-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">D&D Party Dating</a>
+</nav>
+<div class="p-2 border rounded m-5">
+<form method="post" action="#">
+        <div class="form-row">
+            <h1 class="border-bottom col">Personal Information</h1>
+        </div>
+        <div class="form-row">
+            <div class="col-md-8 h-100">
+                <!--String Fields -->
+                <div class="form-group">
+                    <label class="font-weight-bold" for="fname">First Name</label>
+                    <input type="text" class="form-control" id="fname" name="firstname"
+                           placeholder="Enter Your First Name Here" value="{{ @firstname }}">
+                    <check if="{{ @errors['first'] }}">
+                        <span class="err">{{ @errors['first'] }}</span>
+                    </check>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="lname">Last Name</label>
+                    <input type="text" class="form-control" id="lname" name="lastname"
+                           placeholder="Enter Your Last Name Here" value="{{ @lastname }}">
+
+                    <check if="{{ @errors['last'] }}">
+                        <span class="err">{{ @errors['last'] }}</span>
+                    </check>
+                </div>
+
+                <!-- Age field -->
+                <div class="form-group">
+                    <label class="font-weight-bold" for="age">Age</label>
+                    <input type="text" class="form-control" id="age" name="age"
+                           placeholder="Enter Your age" value="{{ @age }}">
+                    <check if="{{ @errors['age'] }}">
+                        <span class="err">{{ @errors['age'] }}</span>
+                    </check>
+                </div>
+
+                <!-- Gender Radio Button-->
+                <label class="font-weight-bold d-block col-">Gender</label>
+                <div class="form-check form-check-inline" id="radio-button">
+                    <input class="form-check-input" type="radio" name="gender" id="Male" value="male"
+                           checked="checked">
+                    <label class="form-check-label" for="Male">Male</label>
+                </div>
+                <div class="form-check form-check-inline" id="gender">
+                    <input class="form-check-input" type="radio" name="gender" id="Female" value="female">
+                    <label class="form-check-label" for="Female">
+                        Female
+                    </label>
+                </div>
+
+                <!-- Phone number -->
+                <div class="form-group mt-1">
+                    <label class="font-weight-bold" for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone"
+                           placeholder="123-456-7890" value="{{ @phone }}">
+                    <check if="{{ @errors['phone'] }}">
+                        <span class="err">{{ @errors['phone'] }}</span>
+                    </check>
+                </div>
+                <!-- Premium Membership -->
+                <div>
+                    <label class="font-weight-bold" for="premium">Premium Membership</label><br>
+                    <input type="checkbox" id="premium" name="premium" value="premium">
+                    Sign me up for a Premium Account!
+                </div>
+            </div>
+            <div class="col-md-4 h-100 border rounded bg-light mt-2">
+                <p class="text-center"><b>Note:</b> All information entered is protected by our
+                    <a href="privacyPolicy.php">privacy policy</a>.
+                    Profile information can only be viewed by others with your permission.</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Next ></button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
