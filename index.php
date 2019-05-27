@@ -16,8 +16,6 @@ require('model/validation.php');
 
 session_start();
 
-$dbh = new Database();
-
 //Creates the instance of the base class
 $f3 = Base::instance();
 
@@ -32,6 +30,8 @@ $f3->route('GET|POST /', function (){
 });
 
 $f3->route('GET|POST /profile-start', function ($f3){
+    $dbh = new Database();
+    $f3->set('dbh', $dbh);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -57,7 +57,7 @@ $f3->route('GET|POST /profile-start', function ($f3){
             if(empty($gender)) {
                 $gender = 'No gender selected.';
             }
-            if($memberStatus == 'premium'){
+            if($memberStatus == '1'){
                 $premium = new PremiumMemeber($firstname, $lastname, $age, $gender, $phone);
                 $_SESSION['member'] = $premium;
             } else{
@@ -109,6 +109,7 @@ $f3->route('GET|POST /profile-continue', function ($f3){
             if(!$_SESSION['member'] instanceof PremiumMemeber){
                 $_SESSION['indoor'] = "(No interests selected";
                 $_SESSION['outdoor'] = " Premium Membership required.)";
+                $f3->get('dbh')->insertMember($_SESSION['memeber'], $f3);
                 $f3->reroute('/summary');
             } else{
                 $f3->reroute('/profile-interests');

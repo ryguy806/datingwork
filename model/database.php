@@ -4,6 +4,10 @@ class Database {
 
     private $_dbh;
 
+    public function __construct() {
+        $this->connect();
+    }
+
     public function connect() {
         try {
             $this->_dbh = new PDO(DB_DSN, USERNAME, PASSWORD);
@@ -14,8 +18,8 @@ class Database {
     }
 
     public function insertMember($member, $f3) {
-        $sql = "INSERT INTO member ('fname', 'lname', 'age', 'phone', 'email', 'gender', 'premium') 
-        VALUES (:fname, :lname, :age, :phone, :email, :gender, :premium)";
+        $sql = "INSERT INTO member ('fname', 'lname', 'age', 'phone', 'email', 'gender', 'premium', 'bio', 'seeking', 
+        'state') VALUES (:fname, :lname, :age, :phone, :email, :gender, :premium, :bio, :seeking, :state)";
         $statement = $this->_dbh->prepare($sql);
 
         $statement->bindParam(':fname', $member->getFname(), PDO::PARAM_STR);
@@ -25,6 +29,9 @@ class Database {
         $statement->bindParam(':email', $member->getEmail(), PDO::PARAM_STR);
         $statement->bindParam(':gender', $member->getGender(), PDO::PARAM_STR);
         $statement->bindParam(':premium', $f3->get('member'), PDO::PARAM_STR);
+        $statement->bindParam(':bio',$member->getBio(), PDO::PARAM_STR);
+        $statement->bindParam(':seeking', $member->getSeeking(),PDO::PARAM_STR);
+        $statement->bindParam(':state', $member->getState(), PDO::PARAM_STR);
 
         $statement->execute();
     }
