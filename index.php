@@ -10,10 +10,13 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //require the autoload
+require '/home/ryanguel/config.php';
 require_once('vendor/autoload.php');
 require('model/validation.php');
 
 session_start();
+
+$dbh = new Database();
 
 //Creates the instance of the base class
 $f3 = Base::instance();
